@@ -4,6 +4,7 @@ package in.williams.john.blackjacktracker;
 // and display of session data objects.
 // source: https://www.youtube.com/watch?v=cp2rL3sAFmI&list=PLS1QulWo1RIaRdy16cOzBO5Jr6kEagA07
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -30,8 +31,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         // Context, name, factory, version.
         super(context, DATABASE_NAME, null, 1);
-        // Create the database and table.
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     // On creation of class object.
@@ -50,6 +49,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         // Now create the table again.
         onCreate(db);
+
+    }
+
+    public boolean insertData(String date, String location, int time_spent, int num_shoes, int buy_in, int cash_out) {
+        // Create the database and table.
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        // Insert data with put() method for each column.
+        contentValues.put(DATE, date);
+        contentValues.put(LOCATION, location);
+        contentValues.put(TIME_SPENT, time_spent);
+        contentValues.put(NUM_SHOES, num_shoes);
+        contentValues.put(BUY_IN, buy_in);
+        contentValues.put(CASH_OUT, cash_out);
+
+        // Calculate the net change before inserting value.
+        int net_change = (buy_in - cash_out);
+        contentValues.put(NET_CHANGE, net_change);
+
+        // Insert the values to our table from contentValues instance.
+        // If failed, it will return -1.
+        long result = db.insert(TABLE_NAME, null, contentValues);
+
+        // If it failed, return false.
+        if (result == -1) {
+            return false;
+        }
+        // Else, return true.
+        return true;
 
     }
 }
