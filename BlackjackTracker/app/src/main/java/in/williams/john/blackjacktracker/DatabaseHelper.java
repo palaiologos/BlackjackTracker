@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Name of db.
     public static final String DATABASE_NAME = "sessions.db";
     // Name of data table.
-    public static final String TABLE_NAME = "session_table.db";
+    public static final String TABLE_NAME = "session_table";
 
     // Data columns.
     public static final String ID = "id";

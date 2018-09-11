@@ -8,11 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Sessions extends Fragment {
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Sessions");
+
     }
 
     @Nullable
