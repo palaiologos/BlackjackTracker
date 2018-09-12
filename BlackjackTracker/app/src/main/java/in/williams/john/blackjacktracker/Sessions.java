@@ -22,6 +22,7 @@ public class Sessions extends Fragment {
     Button btnAddData;
     Button btnviewAll;
     Button btnviewUpdate;
+    Button btnDelete;
 
 
     @Override
@@ -48,6 +49,7 @@ public class Sessions extends Fragment {
         btnAddData = (Button) getView().findViewById(R.id.button_add);
         btnviewAll = (Button) getView().findViewById(R.id.button_viewAll);
         btnviewUpdate = (Button) getView().findViewById(R.id.button_update);
+        btnDelete = (Button) getView().findViewById(R.id.button_delete);
 
         // Call method inside onCreate() so it is called when clicked.
         // Add data button and view all button functionality.
@@ -56,6 +58,30 @@ public class Sessions extends Fragment {
         viewAll();
         // Update data button allows an update operation using the button on sessions.xml.
         updateData();
+        // Delete button allows deletion based on ID value.
+        deleteData();
+    }
+
+    // Delete data function.
+    public void deleteData() {
+        btnDelete.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Set to the return value of the called function from DatabaseHelper.java.
+                        Integer deletedRows = myDb.deleteData(editTextId.getText().toString());
+
+                        // If the row was deleted, show success message.
+                        if (deletedRows > 0) {
+                            Toast.makeText(getActivity(), "Data Deleted Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        // Else, show failure message.
+                        else {
+                            Toast.makeText(getActivity(), "Data Deletion Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
     }
 
     // Update data method.

@@ -117,4 +117,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Return true if data is updated successfully.
         return true;
     }
+
+    // Delete data rows.
+    public Integer deleteData(String id) {
+        // Create db object instance.
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Delete the data based on id, same as in updateData() function.
+        // Function will return an int upon finishing.
+        return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
+    }
 }
