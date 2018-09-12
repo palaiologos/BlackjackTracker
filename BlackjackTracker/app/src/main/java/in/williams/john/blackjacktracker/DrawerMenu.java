@@ -39,6 +39,7 @@ public class DrawerMenu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.nav_home);
+
     }
 
 

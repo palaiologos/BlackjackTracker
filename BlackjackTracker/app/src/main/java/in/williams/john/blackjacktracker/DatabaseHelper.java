@@ -6,8 +6,10 @@ package in.williams.john.blackjacktracker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Var declarations for database.
@@ -66,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CASH_OUT, cash_out);
 
         // Calculate the net change before inserting value.
-        int net_change = (buy_in - cash_out);
+        int net_change = (cash_out - buy_in);
         contentValues.put(NET_CHANGE, net_change);
 
         // Insert the values to our table from contentValues instance.
@@ -80,5 +82,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Else, return true.
         return true;
 
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Res is a cursor object that is the query of getting all data from the table.
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
     }
 }
