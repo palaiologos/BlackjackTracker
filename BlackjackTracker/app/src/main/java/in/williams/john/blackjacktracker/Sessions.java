@@ -18,11 +18,10 @@ public class Sessions extends Fragment {
     // source: https://www.youtube.com/watch?v=p8TaTgr4uKM&index=2&list=PLS1QulWo1RIaRdy16cOzBO5Jr6kEagA07
     DatabaseHelper myDb;
     // Create variables for edit text buttons.
-    EditText editDate, editLocation, editTime, editShoes, editBuyIn, editCashOut;
+    EditText editDate, editLocation, editTime, editShoes, editBuyIn, editCashOut, editTextId;
     Button btnAddData;
     Button btnviewAll;
-
-
+    Button btnviewUpdate;
 
 
     @Override
@@ -34,9 +33,6 @@ public class Sessions extends Fragment {
         // Had to use getActivity() instead of 'this' because it is a fragment.
         // source: https://stackoverflow.com/questions/12229434/databasehelper-not-taking-context-of-listfragment
         myDb = new DatabaseHelper(getActivity());
-        if (myDb != null) {
-            Toast.makeText(getActivity(), "Database created.", Toast.LENGTH_LONG).show();
-        }
 
         // Have to call getView() function to get the view of the fragment first.
         // source: https://www.codeproject.com/Questions/1000137/How-do-I-get-rid-of-the-the-cannot-resolve-method
@@ -46,13 +42,43 @@ public class Sessions extends Fragment {
         editShoes = (EditText) getView().findViewById(R.id.editText_shoes);
         editBuyIn = (EditText) getView().findViewById(R.id.editText_buy_in);
         editCashOut = (EditText) getView().findViewById(R.id.editText_cash_out);
+        editTextId = (EditText) getView().findViewById(R.id.editText_id);
+
+        // Cast buttons to a button type based on their ID from the sessions.xml layout.
         btnAddData = (Button) getView().findViewById(R.id.button_add);
         btnviewAll = (Button) getView().findViewById(R.id.button_viewAll);
+        btnviewUpdate = (Button) getView().findViewById(R.id.button_update);
 
         // Call method inside onCreate() so it is called when clicked.
         // Add data button and view all button functionality.
         addData();
+        // View all for showing all db records.
         viewAll();
+        // Update data button allows an update operation using the button on sessions.xml.
+        updateData();
+    }
+
+    // Update data method.
+    public void updateData() {
+        btnviewUpdate.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // For checking if successfully updated. Using the same input style as addData() funciton below.
+                        boolean isUpdated = myDb.updateData(editTextId.getText().toString(), editDate.getText().toString(), editLocation.getText().toString(),
+                                Integer.parseInt(editTime.getText().toString()), Integer.parseInt(editShoes.getText().toString()),
+                                Integer.parseInt(editBuyIn.getText().toString()), Integer.parseInt(editCashOut.getText().toString()));
+
+                        // If updated successfully, show message with Toast.
+                        if (isUpdated == true) {
+                            Toast.makeText(getActivity(), "Data Updated Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(getActivity(), "Data Update Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
     }
 
     // Method for add data button.

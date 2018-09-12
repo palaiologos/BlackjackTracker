@@ -84,10 +84,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // Return all the data rows for viewing all data.
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         // Res is a cursor object that is the query of getting all data from the table.
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
         return res;
+    }
+
+    // Update data using form on sessions.
+    public boolean updateData(String id, String date, String location, int time_spent, int num_shoes, int buy_in, int cash_out) {
+        // Create instances of database and content values.
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        // Insert data with put() method for each column.
+        contentValues.put(ID, id);
+        contentValues.put(DATE, date);
+        contentValues.put(LOCATION, location);
+        contentValues.put(TIME_SPENT, time_spent);
+        contentValues.put(NUM_SHOES, num_shoes);
+        contentValues.put(BUY_IN, buy_in);
+        contentValues.put(CASH_OUT, cash_out);
+
+        // Calculate the net change before inserting value.
+        int net_change = (cash_out - buy_in);
+        contentValues.put(NET_CHANGE, net_change);
+
+        // Update the records in the db based on ID. Also pass in a string array 'id'.
+        // source: https://www.youtube.com/watch?v=PA4A9IesyCg&index=5&list=PLS1QulWo1RIaRdy16cOzBO5Jr6kEagA07
+        db.update(TABLE_NAME, contentValues, "ID = ?", new String[] {id});
+        // Return true if data is updated successfully.
+        return true;
     }
 }

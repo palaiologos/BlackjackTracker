@@ -66,6 +66,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ID"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/editText_cash_out"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <!-- Section for editing the text -->
     <EditText
         android:layout_width="match_parent"
@@ -117,6 +127,15 @@
         android:layout_alignTop="@+id/textView6"
         android:layout_toRightOf="@+id/textView6"
         android:layout_toEndOf="@+id/textView6" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_id"
+        android:inputType="number"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7" />
 
     <!-- Buttons section -->
     <Button
