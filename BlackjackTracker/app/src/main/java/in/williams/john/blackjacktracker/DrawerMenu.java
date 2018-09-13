@@ -91,6 +91,9 @@ public class DrawerMenu extends AppCompatActivity
             case R.id.nav_settings:
                 fragment = new Settings();
                 break;
+            case R.id.nav_add_sessions:
+                fragment = new AddSession();
+                break;
         }
 
         if (fragment != null) {
