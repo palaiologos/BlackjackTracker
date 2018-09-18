@@ -92,16 +92,21 @@ public class Sessions extends Fragment {
                         tv.setTextSize(18);
                         tv.setPadding(0, 5, 5 ,5);
 
-                        // Get the text of the column we are currently on.
-                        tv.setText(res.getString(j));
-                        // Add the actual table row to the layout.
-                        row.addView(tv);
-
                         // Calculate running total as we go with last column.
+                        // Also, append dollar sign to outcome column.
                         if (j == (cols - 1)) {
                             running_total += res.getInt(j);
-                            //Integer.parseInt(editTime.getText().toString()
+                            // Get the text of the column we are currently on.
+                            tv.setText("$" + res.getString(j));
                         }
+                        // Otherwise, regular number for other columns.
+                        else {
+                            // Get the text of the column we are currently on.
+                            tv.setText(res.getString(j));
+                        }
+
+                        // Add the actual table row to the layout.
+                        row.addView(tv);
 
                     } // End inner for loop.
 
@@ -137,7 +142,15 @@ public class Sessions extends Fragment {
             tv.setPadding(0, 5, 5 ,5);
 
             // Get the text of the column we are currently on.
-            tv.setText("Running Total: " + running_total);
+            // If positive, add a plus sign.
+            if (running_total > 0) {
+                tv.setText("Running Total: +$" + running_total);
+            }
+            // Otherwise, 0 will have nothing and negatives will have the minus.
+            else {
+                tv.setText("Running Total: $" + running_total);
+            }
+
             // Add the actual table row to the layout.
             row.addView(tv);
             //-------------------------------------------------------------------------------------
