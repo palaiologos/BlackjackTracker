@@ -53,7 +53,7 @@ public class Sessions extends Fragment {
         Cursor res = myDb.getSessionsViewData();
         if (res.getCount() == 0) {
             // Show message.
-            showMessage("Error", "No data found");
+            showMessage("Alert", "No sessions found");
             return;
         }
 
@@ -67,13 +67,16 @@ public class Sessions extends Fragment {
                 int rows = res.getCount();
                 int cols = res.getColumnCount();
 
+                //showMessage("Alert", "Number of rows: " + rows); 4
+                //showMessage("Alert", "Number of columns: " + cols); 5
+
                 // outer for loop. Loop once for each row found above.
                 for (int i = 0; i < rows; i++) {
                     // Create a new table row object.
                     TableRow row = new TableRow(getActivity());
                     // Set the params to fill parent and wrap content.
                     TableLayout.LayoutParams tableRowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                            TableLayout.LayoutParams.WRAP_CONTENT);
+                            TableLayout.LayoutParams.MATCH_PARENT);
                     row.setLayoutParams(tableRowParams);
 
                     // Inner for loop. Loop for each data column we want to put into the layout.
@@ -82,13 +85,13 @@ public class Sessions extends Fragment {
                         TextView tv = new TextView(getActivity());
                         // Set it to be a table row type.
                         tv.setLayoutParams(new TableRow.LayoutParams(
-                                TableRow.LayoutParams.WRAP_CONTENT,
-                                TableRow.LayoutParams.WRAP_CONTENT));
+                                TableRow.LayoutParams.MATCH_PARENT,
+                                TableRow.LayoutParams.MATCH_PARENT));
                         // Set the data to gravitate to the center of the view.
                         tv.setGravity(Gravity.CENTER);
                         // Set attributes of view.
                         tv.setTextSize(18);
-                        tv.setPadding(0, 5, 0 ,5);
+                        tv.setPadding(0, 5, 5 ,5);
 
                         // Get the text of the column we are currently on.
                         tv.setText(res.getString(j));
@@ -99,44 +102,19 @@ public class Sessions extends Fragment {
 
                     // Add row to the Table Layout at the end of the outer loop.
                     t1.addView(row);
+                    // Need this to move to the next table row. Otherwise,
+                    // will do the same table row 'row' num of times.
+                    res.moveToNext();
 
                 } // End outer for loop.
             } while (res.moveToNext()); // End do-while loop.
 
+            // At the very end, add a running total counter.
+            // WIP.
+
         } // End res.moveToFirst if.
 
-
-
-
-
-
-
-
-
-        /*
-        StringBuffer buffer = new StringBuffer();
-
-        // While going thru the database..
-        while (res.moveToNext()) {
-            // Store it in the buffer.
-            // Gets the id column and the value at column 0. Then append newline.
-            // Do this for each column.
-            buffer.append("id: " + res.getString(0) + "\n");
-            buffer.append("date: " + res.getString(1) + "\n");
-            buffer.append("location: " + res.getString(2) + "\n");
-            buffer.append("time_spent: " + res.getString(3) + "\n");
-            buffer.append("num_shoes: " + res.getString(4) + "\n");
-            buffer.append("buy_in: " + res.getString(5) + "\n");
-            buffer.append("cash_out: " + res.getString(6) + "\n");
-            // Double line break for easier readability.
-            buffer.append("net_change: " + res.getString(7) + "\n\n");
-
-        } // End while. */
-
-        // Show all the data.
-        //showMessage("Data", buffer.toString());
-
-    }
+    } // End function.
 
 
     public void showMessage(String title, String message) {
