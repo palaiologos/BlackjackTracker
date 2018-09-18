@@ -61,14 +61,13 @@ public class Sessions extends Fragment {
         // If there is a first, get counts.
         // source: https://stackoverflow.com/questions/32094123/populating-table-layout-from-sqlite-database
         if (res.moveToFirst()) {
+            // Keeping track of all-time net win/loss.
+            int running_total = 0;
 
             // Do-while loop while there is a next value for cursor to go to.
             do {
                 int rows = res.getCount();
                 int cols = res.getColumnCount();
-
-                //showMessage("Alert", "Number of rows: " + rows); 4
-                //showMessage("Alert", "Number of columns: " + cols); 5
 
                 // outer for loop. Loop once for each row found above.
                 for (int i = 0; i < rows; i++) {
@@ -98,6 +97,12 @@ public class Sessions extends Fragment {
                         // Add the actual table row to the layout.
                         row.addView(tv);
 
+                        // Calculate running total as we go with last column.
+                        if (j == (cols - 1)) {
+                            running_total += res.getInt(j);
+                            //Integer.parseInt(editTime.getText().toString()
+                        }
+
                     } // End inner for loop.
 
                     // Add row to the Table Layout at the end of the outer loop.
@@ -109,8 +114,38 @@ public class Sessions extends Fragment {
                 } // End outer for loop.
             } while (res.moveToNext()); // End do-while loop.
 
+            //-------------------------------------------------------------------------------------
             // At the very end, add a running total counter.
-            // WIP.
+            //-------------------------------------------------------------------------------------
+            // Make one last table row for our running total.
+            TableRow row = new TableRow(getActivity());
+            // Set the params to fill parent and wrap content.
+            TableLayout.LayoutParams tableRowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
+                    TableLayout.LayoutParams.MATCH_PARENT);
+            row.setLayoutParams(tableRowParams);
+
+            // Set up the text view for the running total text.
+            TextView tv = new TextView(getActivity());
+            // Set it to be a table row type.
+            tv.setLayoutParams(new TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.MATCH_PARENT));
+            // Set the data to gravitate to the center of the view.
+            tv.setGravity(Gravity.CENTER);
+            // Set attributes of view.
+            tv.setTextSize(18);
+            tv.setPadding(0, 5, 5 ,5);
+
+            // Get the text of the column we are currently on.
+            tv.setText("Running Total: " + running_total);
+            // Add the actual table row to the layout.
+            row.addView(tv);
+            //-------------------------------------------------------------------------------------
+            // End running total section.
+            //-------------------------------------------------------------------------------------
+
+            // Add running_total row to the layout.
+            t1.addView(row);
 
         } // End res.moveToFirst if.
 
