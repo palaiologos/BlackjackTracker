@@ -92,6 +92,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    // Only get certain columns for the Sessions view.
+    public Cursor getSessionsViewData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Res is a cursor object that is the query of getting all data from the table.
+        Cursor res = db.rawQuery("select date, location, time_spent, num_shoes, net_change from " + TABLE_NAME, null);
+        return res;
+    }
+
     // Update data using form on sessions.
     public boolean updateData(String id, String date, String location, int time_spent, int num_shoes, int buy_in, int cash_out) {
         // Create instances of database and content values.
