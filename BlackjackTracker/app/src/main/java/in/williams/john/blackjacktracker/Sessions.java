@@ -144,11 +144,11 @@ public class Sessions extends Fragment {
             // Get the text of the column we are currently on.
             // If positive, add a plus sign.
             if (running_total > 0) {
-                tv.setText("Running Total: +$" + running_total);
+                tv.setText("Total: +$" + running_total);
             }
             // Otherwise, 0 will have nothing and negatives will have the minus.
             else {
-                tv.setText("Running Total: $" + running_total);
+                tv.setText("Total: $" + running_total);
             }
 
             // Add the actual table row to the layout.
