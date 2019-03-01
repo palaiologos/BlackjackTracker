@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getSessionsViewData() {
         SQLiteDatabase db = this.getWritableDatabase();
         // Res is a cursor object that is the query of getting all data from the table.
-        Cursor res = db.rawQuery("select date, location, time_spent, num_shoes, net_change from " + TABLE_NAME, null);
+        Cursor res = db.rawQuery("select id, date, location, time_spent, num_shoes, net_change from " + TABLE_NAME, null);
         return res;
     }
 
