@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -35,6 +36,21 @@ public class Trends extends Fragment {
 
         // Add our line graph to our graph view object.
         graphView.addSeries(series);
+
+        // Make labels for the x and y axis on the graph.
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
+        {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                // Check if it is the x axis.
+                if (isValueX){
+                    // Return the value of the x axis.
+                    return super.formatLabel(value, isValueX) + " shoes";
+                }
+
+                return super.formatLabel(value, isValueX);
+            }
+        });
     }
 
     // Save data points in this array.
@@ -50,6 +66,7 @@ public class Trends extends Fragment {
 
         int time = 0;
         int net_gain = 0;
+        int shoes_played = 0;
 
         // Loop through all data rows in db.
         for (int i = 0; i < cursor.getCount(); i++) {
@@ -57,11 +74,11 @@ public class Trends extends Fragment {
 
             // Get time and net winnings data columns.
             // Add them to existing vars so we have a cumulative value over time.
-            time += cursor.getInt(1);
-            net_gain += cursor.getInt(3);
+            time += cursor.getInt(3);
+            shoes_played += cursor.getInt(4);
 
             // Add these to the data point.
-            dp[i] = new DataPoint(time, net_gain);
+            dp[i] = new DataPoint(shoes_played, time);
 
         }
 
