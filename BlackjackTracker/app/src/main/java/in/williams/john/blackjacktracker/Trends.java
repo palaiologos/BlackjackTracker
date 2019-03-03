@@ -48,6 +48,20 @@ public class Trends extends Fragment {
         series.setTitle("Running Total $");
         graphView.getLegendRenderer().setVisible(true);
 
+        // Set manual graph bounds for x axis.
+        // source: https://www.youtube.com/watch?v=Lnm6YG8Ub50&list=PLFh8wpMiEi88ojfNpavGpMB0dtP4mvEqa&index=11
+        graphView.getViewport().setXAxisBoundsManual(true);
+        graphView.getViewport().setMinX(1);
+
+        // Make the graph scrollable.
+        graphView.getViewport().setScrollable(true);
+        // Make Y axis scrollable.
+        graphView.getViewport().setScrollableY(true);
+
+        // Make graph zoomable, x and y axis.
+        graphView.getViewport().setScalable(true);
+        graphView.getViewport().setScalableY(true);
+
         // Align legend to bottom.
         graphView.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
 
