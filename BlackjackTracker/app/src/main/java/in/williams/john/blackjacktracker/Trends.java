@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -36,6 +37,20 @@ public class Trends extends Fragment {
 
         // Add our line graph to our graph view object.
         graphView.addSeries(series);
+
+        // Set graph title.
+        // source: http://www.android-graphview.org/style-options/
+        graphView.setTitle("Wins/Losses");
+        graphView.setTitleTextSize(70);
+
+        // Make the legend for the graph.
+        // source: https://www.youtube.com/watch?v=4NYljUle2u4&list=PLFh8wpMiEi88ojfNpavGpMB0dtP4mvEqa&index=17
+        series.setTitle("Running Total $");
+        graphView.getLegendRenderer().setVisible(true);
+
+        // Align legend to bottom.
+        graphView.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
 
         // Make labels for the x and y axis on the graph.
         graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
