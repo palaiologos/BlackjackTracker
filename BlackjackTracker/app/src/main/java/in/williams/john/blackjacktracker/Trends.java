@@ -43,14 +43,17 @@ public class Trends extends Fragment {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 // Check if it is the x axis.
+
                 if (isValueX){
                     // Return the value of the x axis.
-                    return super.formatLabel(value, isValueX) + " shoes";
+                    return super.formatLabel(value, isValueX);
+                    // Y axis is money.
+                } else {
+                    return super.formatLabel(value, isValueX);
                 }
-
-                return super.formatLabel(value, isValueX);
             }
         });
+
     }
 
     // Save data points in this array.
@@ -64,9 +67,8 @@ public class Trends extends Fragment {
         // Make datapoint array length of num of rows in db.
         DataPoint[] dp=new DataPoint[cursor.getCount()];
 
-        int time = 0;
+        int session = 0;
         int net_gain = 0;
-        int shoes_played = 0;
 
         // Loop through all data rows in db.
         for (int i = 0; i < cursor.getCount(); i++) {
@@ -74,11 +76,11 @@ public class Trends extends Fragment {
 
             // Get time and net winnings data columns.
             // Add them to existing vars so we have a cumulative value over time.
-            time += cursor.getInt(3);
-            shoes_played += cursor.getInt(4);
+            session ++;
+            net_gain += cursor.getInt(7);
 
             // Add these to the data point.
-            dp[i] = new DataPoint(shoes_played, time);
+            dp[i] = new DataPoint(session, net_gain);
 
         }
 
