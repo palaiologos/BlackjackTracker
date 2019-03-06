@@ -1,5 +1,6 @@
 package in.williams.john.blackjacktracker;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -77,6 +78,7 @@ public class DrawerMenu extends AppCompatActivity
 
     private void displaySelectedScreen(int id) {
         Fragment fragment = null;
+        Activity activity = null;
 
         switch(id) {
             case R.id.nav_home:

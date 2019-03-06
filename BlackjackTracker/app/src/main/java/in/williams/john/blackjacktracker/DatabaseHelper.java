@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Var declarations for database.
-    // Name of db.
+    // Name of db for blackjack sessions.
     public static final String DATABASE_NAME = "sessions.db";
     // Name of data table.
     public static final String TABLE_NAME = "session_table";
@@ -27,7 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String BUY_IN = "buy_in";
     public static final String CASH_OUT = "cash_out";
     public static final String NET_CHANGE = "net_change";
-
 
     // Constructor method.
     public DatabaseHelper(Context context) {

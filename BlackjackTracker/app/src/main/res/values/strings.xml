@@ -7,5 +7,12 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="bj_image1">splash screen image</string>
-    <string name="splash_text">Blackjack Helper Initializing</string>
+    <string name="splash_text">Blackjack Tracker Initializing</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="not_registered">Not Registered</string>
+    <string name="register">REGISTER</string>
+    <string name="password_confirmation">Confirm Password</string>
+    <string name="already_registered">Already Registered?</string>
 </resources>

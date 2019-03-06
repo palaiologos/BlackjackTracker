@@ -87,6 +87,7 @@ public class Sessions extends Fragment {
                                 TableRow.LayoutParams.MATCH_PARENT,
                                 TableRow.LayoutParams.MATCH_PARENT));
                         // Set the data to gravitate to the center of the view.
+                        // Set the data to gravitate to the center of the view.
                         tv.setGravity(Gravity.CENTER);
                         // Set attributes of view.
                         tv.setTextSize(18);

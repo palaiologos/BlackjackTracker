@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import static java.lang.Thread.sleep;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -19,9 +21,9 @@ public class SplashScreen extends AppCompatActivity {
                 // Tries to sleep for 3 seconds.
                 try {
                     sleep(3000);
-                    // Starts the activity, then finishes.
-                    Intent intent = new Intent(getApplicationContext(), DrawerMenu.class);
-                    startActivity(intent);
+                    // Starts the splash screen then goes to login screen.
+                    Intent goToLogin = new Intent(getApplicationContext(), Login.class);
+                    startActivity(goToLogin);
                     finish();
 
                 } catch (InterruptedException e) {
@@ -32,5 +34,6 @@ public class SplashScreen extends AppCompatActivity {
         };
 
         myThread.start();
+
     }
 }
