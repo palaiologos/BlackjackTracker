@@ -21,6 +21,7 @@ public class Login extends AppCompatActivity {
     Button mButtonLogin;
     TextView mTextViewRegister;
     UserDatabase db;
+    UserAccountManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class Login extends AppCompatActivity {
         mTextPassword = (EditText) findViewById(R.id.edittext_password);
         mButtonLogin = (Button) findViewById(R.id.button_login);
         mTextViewRegister = (TextView) findViewById(R.id.textview_register);
+
+        session = new UserAccountManager(getApplicationContext());
 
         // On click listener for the register button.
         mTextViewRegister.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +61,17 @@ public class Login extends AppCompatActivity {
                     // Print to the screen popup.
                     Toast.makeText(Login.this, "Successfully Logged In", Toast.LENGTH_SHORT).show();
 
+                    session.createUserLoginSession(user, pwd);
+
                     // Go to home screen after login.
                     Intent goToHome = new Intent(Login.this, DrawerMenu.class);
+
+                    // Flags to avoid errors
+                    goToHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    goToHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     startActivity(goToHome);
+                    finish();
                 }
                 else {
                     Toast.makeText(Login.this, "Login Error", Toast.LENGTH_SHORT).show();

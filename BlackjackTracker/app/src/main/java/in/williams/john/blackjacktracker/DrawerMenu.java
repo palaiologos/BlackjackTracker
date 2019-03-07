@@ -22,6 +22,9 @@ import android.widget.Toast;
 public class DrawerMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // An instance to hold the info of whoever is logged in.
+    UserAccountManager session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,21 @@ public class DrawerMenu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.nav_home);
+
+        // Account instance.
+        session = new UserAccountManager(getApplicationContext());
+
+        // DEBUG: Show who is logged in.
+        Toast.makeText(getApplicationContext(),
+                "User Login Status: " + session.isUserLoggedIn(),
+                Toast.LENGTH_LONG).show();
+
+
+        // Check user login.
+        // If user not logged in, redirect to the login page.
+        if (session.checkLogin() ) {
+            finish();
+        }
 
     }
 
