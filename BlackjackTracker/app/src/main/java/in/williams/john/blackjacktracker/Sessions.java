@@ -79,7 +79,8 @@ public class Sessions extends Fragment {
                     row.setLayoutParams(tableRowParams);
 
                     // Inner for loop. Loop for each data column we want to put into the layout.
-                    for (int j = 0; j < cols; j++) {
+                    // j=1 skips 0, which is the ID column.
+                    for (int j = 1; j < cols; j++) {
                         // Make a new text view object.
                         TextView tv = new TextView(getActivity());
                         // Set it to be a table row type.

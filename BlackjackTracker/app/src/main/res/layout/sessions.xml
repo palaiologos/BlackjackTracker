@@ -9,18 +9,11 @@
         android:layout_width="fill_parent">
         <!-- The header row -->
 
-        <TextView
-            android:id="@+id/table_id"
-            android:layout_column="0"
-            android:layout_weight="0.15"
-            android:text="ID"
-            android:textAlignment="center"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/table_date"
             android:layout_column="0"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:padding="1dip"
             android:text="Date"
             android:textAlignment="center"
@@ -31,7 +24,7 @@
             android:layout_column="1"
             android:padding="3dip"
             android:text="Location"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -40,7 +33,7 @@
             android:layout_column="2"
             android:padding="3dip"
             android:text="Time"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -49,7 +42,7 @@
             android:layout_column="3"
             android:padding="3dip"
             android:text="Shoes"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -58,7 +51,7 @@
             android:layout_column="4"
             android:padding="3dip"
             android:text="Outcome"
-            android:layout_weight="0.15"
+            android:layout_weight="0.2"
             android:textAlignment="center"
             android:textSize="16sp" />
     </TableRow>
