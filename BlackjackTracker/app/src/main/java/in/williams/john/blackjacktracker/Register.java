@@ -52,8 +52,18 @@ public class Register extends AppCompatActivity {
                 String pwd = mTextPassword.getText().toString().trim();
                 String cnf_pwd = mTextCnfPassword.getText().toString().trim();
 
+                // Check if username is too short.
+                if (user.length() < 3){
+                    Toast.makeText(Register.this, "Username must be at least 5 characters", Toast.LENGTH_SHORT).show();
+                }
+
+                // Check if passwords are too short.
+                else if (pwd.length() < 5 || cnf_pwd.length() < 5){
+                    Toast.makeText(Register.this, "Password must be at least 5 characters", Toast.LENGTH_SHORT).show();
+                }
+
                 // Check if passwords match in the two separate fields.
-                if (pwd.equals(cnf_pwd) ) {
+                else if (pwd.equals(cnf_pwd) ) {
                     // Add user to db.
                     long val = db.addUser(user, pwd);
 
@@ -65,8 +75,6 @@ public class Register extends AppCompatActivity {
                     else {
                         Toast.makeText(Register.this, "Registration Error", Toast.LENGTH_SHORT).show();
                     }
-
-
                     Toast.makeText(Register.this, "Successfully Registered", Toast.LENGTH_SHORT).show();
 
                     // Once registered, move to the login page.
