@@ -9,6 +9,15 @@
         android:layout_width="fill_parent">
         <!-- The header row -->
 
+        <TextView
+            android:id="@+id/table_id"
+            android:layout_column="0"
+            android:layout_weight="0.2"
+            android:padding="1dip"
+            android:text="ID"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
 
         <TextView
             android:id="@+id/table_date"
