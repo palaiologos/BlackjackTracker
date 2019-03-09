@@ -1,6 +1,8 @@
 package in.williams.john.blackjacktracker;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,6 +27,8 @@ public class DrawerMenu extends AppCompatActivity
     // An instance to hold the info of whoever is logged in.
     UserAccountManager session;
 
+    MenuItem logout_item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +48,20 @@ public class DrawerMenu extends AppCompatActivity
 
         displaySelectedScreen(R.id.nav_home);
 
+        // Set logout button.
+        logout_item = (MenuItem) findViewById(R.id.action_settings);
+
+
+
+
+
+
+
+
+
+
         // Account instance.
         session = new UserAccountManager(getApplicationContext());
-
-        // DEBUG: Show who is logged in.
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isUserLoggedIn(),
-                Toast.LENGTH_LONG).show();
-
 
         // Check user login.
         // If user not logged in, redirect to the login page.
@@ -137,4 +147,5 @@ public class DrawerMenu extends AppCompatActivity
 
         return true;
     }
+
 }

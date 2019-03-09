@@ -1,22 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:openDrawer="start">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings Page"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
 
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="#ffffff"
-        android:text="@string/logout"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="2dp"
+            android:paddingLeft="2dp" />
 
-</android.support.constraint.ConstraintLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-40dp"
+            android:text="Running Total:"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_running_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Total Hours:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_total_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Shoes Played:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_shoes_played"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="$ per Shoe:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_money_per_shoe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="$ per Hour:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_money_per_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Wins:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_total_wins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Losses:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_total_losses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Win Rate:"
+            android:gravity="left"
+            android:paddingLeft="2dp" />
+
+        <TextView
+            android:id="@+id/settings_win_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placeholder"
+            android:paddingLeft="2dp" />
+
+
+
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#ffffff"
+            android:text="@string/logout"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="113dp" />
+
+
+</LinearLayout>

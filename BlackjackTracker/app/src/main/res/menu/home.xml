@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Home.xml"
-        app:showAsAction="never" />
+        android:title="Action Settings"
+        app:showAsAction="never"/>
 </menu>
