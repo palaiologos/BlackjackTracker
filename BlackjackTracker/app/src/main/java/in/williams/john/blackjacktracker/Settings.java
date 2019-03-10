@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Settings extends Fragment {
 
     Button mButtonLogout;
@@ -24,7 +27,7 @@ public class Settings extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Settings");
+        getActivity().setTitle("Account");
 
         // Account session.
         session = new UserAccountManager(getContext());
@@ -69,7 +72,6 @@ public class Settings extends Fragment {
         TextView totalLossesView = (TextView)getView().findViewById(R.id.settings_total_losses);
         TextView winRateView = (TextView)getView().findViewById(R.id.settings_win_rate);
 
-
         // Stats to be calculated.
         double running_total = 0;
         double total_hours = 0;
@@ -103,39 +105,38 @@ public class Settings extends Fragment {
             // Loop while there is a next value for the cursor to go to.
             do {
                 int rows = res.getCount();
-                sessions = res.getColumnCount();
+                sessions = res.getCount();
                 int cols = res.getColumnCount();
 
-                // For every row, loop.
-                for (int i = 0; i < rows; i++) {
+                // For every column, loop.
+                for (int j = 3; j < cols; j++) {
 
-                    // For every column, loop.
-                    for (int j = 3; j < cols; j++) {
+                    // Switch statement for handling col values.
+                    switch (j) {
+                        // Time, in minutes.
+                        case 3:
+                            total_hours += res.getInt(j);
+                            break;
+                            // Shoes.
+                        case 4:
+                            total_shoes += res.getInt(j);
+                            break;
+                            // Net-change.
+                        case 5:
+                            running_total += res.getInt(j);
+                            // Calculate wins and losses.
+                            if (res.getInt(j) > 0) {
+                                total_wins++;
+                            }
+                            else {
+                                total_losses++;
+                            }
+                            break;
 
-                        // Switch statement for handling col values.
-                        switch (j) {
-                            // Time, in minutes.
-                            case 3: total_hours += res.getInt(j);
-                                break;
-                                // Shoes.
-                            case 4: total_shoes += res.getInt(j);
-                                break;
-                                // Net-change.
-                            case 5: running_total += res.getInt(j);
-                                // Calculate wins and losses.
-                                if (res.getInt(j) > 0) {
-                                    total_wins++;
-                                }
-                                else {
-                                    total_losses++;
-                                }
-                                break;
-                            default:
-                                break;
-                        } // End switch.
-                    } // End column loop.
-                } // End row loop.
-
+                        default:
+                            break;
+                    } // End switch.
+                } // End column loop.
 
             } while(res.moveToNext() ); // End do-while.
 
@@ -144,9 +145,12 @@ public class Settings extends Fragment {
         // Calculate and set values in the views.
 
         // Get money per hour, convert minutes to hours, etc.
-        money_per_hour = running_total / (total_hours / 60);
-        money_per_shoe = running_total / total_shoes;
         total_hours = total_hours / 60;
+
+        money_per_hour = running_total / (total_hours);
+
+        money_per_shoe = running_total / total_shoes;
+
 
         // Calculate win rate to avoid dividing by zero.
         if (total_wins < 1) {
@@ -161,14 +165,14 @@ public class Settings extends Fragment {
 
 
         // Set values.
-        runningTotalView.setText("$" + Double.toString(running_total));
-        totalHoursView.setText(Double.toString(total_hours));
-        shoesPlayedView.setText(Double.toString(total_shoes));
-        moneyPerShoeView.setText("$" + Double.toString(money_per_shoe));
-        moneyPerHourView.setText("$" + Double.toString(money_per_hour));
-        totalWinsView.setText(Double.toString(total_wins));
-        totalLossesView.setText(Double.toString(total_losses));
-        winRateView.setText(Double.toString(win_rate) + "%");
+        runningTotalView.setText("$" + Double.toString(round(running_total, 2)));
+        totalHoursView.setText(Double.toString(round(total_hours, 1)));
+        shoesPlayedView.setText(Double.toString(round(total_shoes, 0)));
+        moneyPerShoeView.setText("$" + Double.toString(round(money_per_shoe, 2)));
+        moneyPerHourView.setText("$" + Double.toString(round(money_per_hour, 2)));
+        totalWinsView.setText(Double.toString(round(total_wins, 0)));
+        totalLossesView.setText(Double.toString(round(total_losses, 0)));
+        winRateView.setText(Double.toString(round(win_rate, 2) ) + "%");
 
     } // End populateStats()
 
@@ -179,5 +183,16 @@ public class Settings extends Fragment {
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.settings, container, false);
+    }
+
+
+    // Function for rounding numbers to a certain number of places.
+    // source: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }
