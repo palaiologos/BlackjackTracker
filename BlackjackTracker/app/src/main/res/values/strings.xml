@@ -16,4 +16,5 @@
     <string name="password_confirmation">Confirm Password</string>
     <string name="already_registered">Already Registered?</string>
     <string name="logout">LOGOUT</string>
+    <string name="bj_news">Blackjack News &lt;a href=https://assets.bj21.com/newsletters/pdf_files/000/000/028/original/CBJN1805.pdf?1525361174>Free Sample&lt;/a></string>
 </resources>
