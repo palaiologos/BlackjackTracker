@@ -19,7 +19,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
 
 public class DrawerMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,7 +32,7 @@ public class DrawerMenu extends AppCompatActivity
     // An instance to hold the info of whoever is logged in.
     UserAccountManager session;
 
-    MenuItem logout_item;
+    TextView nav_username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +53,6 @@ public class DrawerMenu extends AppCompatActivity
 
         displaySelectedScreen(R.id.nav_home);
 
-        // Set logout button.
-        logout_item = (MenuItem) findViewById(R.id.action_settings);
-
-
-
-
-
-
-
-
-
-
         // Account instance.
         session = new UserAccountManager(getApplicationContext());
 
@@ -68,6 +61,19 @@ public class DrawerMenu extends AppCompatActivity
         if (session.checkLogin() ) {
             finish();
         }
+
+        // Get username from database.
+        HashMap<String, String> user = session.getUserDetails();
+        String username = user.get(UserAccountManager.KEY_NAME);
+
+
+        // Select nav header menu and set username text.
+        NavigationView navigationView2 = (NavigationView) findViewById(R.id.nav_view);
+        navigationView2.setNavigationItemSelectedListener(this);
+        TextView nav_username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
+        nav_username.setText("Hello, " + username);
+
+
 
     }
 
