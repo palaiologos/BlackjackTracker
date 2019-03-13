@@ -10,6 +10,15 @@
     tools:openDrawer="start">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="RESOURCES"
+        android:textSize="22sp" />
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,6 +49,7 @@
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/basic_rules"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -59,28 +69,14 @@
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/bj_chart"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="6-8 Deck Games"
+        android:text="Strategy Charts"
         android:background="#808080" />
 
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_gravity="center"
-        android:text="Single Deck"
-        android:background="#808080" />
-
-    <Button
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_gravity="center"
-        android:text="Double Deck"
-        android:background="#808080" />
 
 
 
@@ -94,6 +90,7 @@
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/basic_strategy"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -113,6 +110,7 @@
         android:textSize="16sp" />
 
     <Button
+        android:id="@+id/counting"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"

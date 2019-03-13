@@ -20,6 +20,10 @@ public class Home extends Fragment {
 
     // Buttons to links.
     Button blackjack_news;
+    Button how_to_play;
+    Button chart;
+    Button strategy;
+    Button counting_cards;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -27,8 +31,12 @@ public class Home extends Fragment {
 
         getActivity().setTitle("Home");
 
-        // Set blackjack news link.
+        // Set buttons to link with their views.
         blackjack_news = (Button)getView().findViewById(R.id.bj_news);
+        how_to_play = (Button)getView().findViewById(R.id.basic_rules);
+        chart = (Button)getView().findViewById(R.id.bj_chart);
+        strategy = (Button)getView().findViewById(R.id.basic_strategy);
+        counting_cards = (Button)getView().findViewById(R.id.counting);
 
 
         // On click listener for bj news button.
@@ -44,7 +52,68 @@ public class Home extends Fragment {
             }
         });
 
+        // On click listener for basic rules button.
+        how_to_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Link to url.
+                String url = "https://www.888casino.com/blog/blackjack-strategy-guide/how-to-play-blackjack";
+                Intent how_to_play = new Intent(Intent.ACTION_VIEW, Uri.parse( url) );
+
+                startActivity(how_to_play);
+            }
+        });
+
+        // On click listener for charts button.
+        chart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Link to url.
+                String url = "https://www.888casino.com/blog/blackjack-strategy-guide/blackjack-charts";
+                Intent charts = new Intent(Intent.ACTION_VIEW, Uri.parse( url) );
+
+                startActivity(charts);
+            }
+        });
+
+        // On click listener for strategy button.
+        strategy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Link to url.
+                String url = "https://www.888casino.com/blog/blackjack-strategy-guide/basic-blackjack-strategy";
+                Intent strat = new Intent(Intent.ACTION_VIEW, Uri.parse( url) );
+
+                startActivity(strat);
+            }
+        });
+
+        // On click listener for counting button.
+        counting_cards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Link to url.
+                String url = "https://www.888casino.com/blog/blackjack-strategy-guide/blackjack-card-counting";
+                Intent counting = new Intent(Intent.ACTION_VIEW, Uri.parse( url) );
+
+                startActivity(counting);
+            }
+        });
+
+
+
+
+
     }
+
+
+
+
+
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
