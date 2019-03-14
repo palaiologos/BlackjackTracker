@@ -58,6 +58,7 @@ public class UserAccountManager {
 
     // Check login status. If not logged in, redirect to login page.
     // Otherwise, go to home page as usual.
+    // Returns TRUE if NOT logged in. FALSE if logged in.
     public boolean checkLogin() {
 
         // Check login status.

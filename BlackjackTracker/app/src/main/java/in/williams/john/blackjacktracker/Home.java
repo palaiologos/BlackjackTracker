@@ -1,5 +1,6 @@
 package in.williams.john.blackjacktracker;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,11 +26,16 @@ public class Home extends Fragment {
     Button strategy;
     Button counting_cards;
 
+    UserAccountManager session;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         getActivity().setTitle("Home");
+
+        // Account session.
+        session = new UserAccountManager(getContext());
 
         // Set buttons to link with their views.
         blackjack_news = (Button)getView().findViewById(R.id.bj_news);
@@ -103,7 +109,6 @@ public class Home extends Fragment {
                 startActivity(counting);
             }
         });
-
 
 
 

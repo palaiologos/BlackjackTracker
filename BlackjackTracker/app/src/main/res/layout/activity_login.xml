@@ -12,15 +12,16 @@
 
     <ImageView
         android:layout_width="wrap_content"
+        android:background="@android:color/transparent"
         android:layout_height="127dp"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/login_icon_cards" />
+        android:layout_marginTop="130dp"
+        app:srcCompat="@drawable/blackjack_login_icon" />
 
     <EditText
         android:id="@+id/edittext_username"
         android:layout_width="160dp"
         android:layout_height="35dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="20dp"
         android:background="#ffffff"
         android:paddingLeft="2dp"
         android:drawableLeft="@drawable/login_icon_username"

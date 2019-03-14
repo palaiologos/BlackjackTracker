@@ -38,6 +38,7 @@ public class Login extends AppCompatActivity {
 
         session = new UserAccountManager(getApplicationContext());
 
+
         // On click listener for the register button.
         mTextViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override

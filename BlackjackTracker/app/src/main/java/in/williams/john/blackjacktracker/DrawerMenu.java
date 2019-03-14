@@ -56,12 +56,6 @@ public class DrawerMenu extends AppCompatActivity
         // Account instance.
         session = new UserAccountManager(getApplicationContext());
 
-        // Check user login.
-        // If user not logged in, redirect to the login page.
-        if (session.checkLogin() ) {
-            finish();
-        }
-
         // Get username from database.
         HashMap<String, String> user = session.getUserDetails();
         String username = user.get(UserAccountManager.KEY_NAME);
@@ -72,8 +66,6 @@ public class DrawerMenu extends AppCompatActivity
         navigationView2.setNavigationItemSelectedListener(this);
         TextView nav_username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
         nav_username.setText("Hello, " + username);
-
-
 
     }
 
@@ -95,20 +87,6 @@ public class DrawerMenu extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the DrawerMenu/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void displaySelectedScreen(int id) {
         Fragment fragment = null;
