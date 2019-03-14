@@ -40,7 +40,7 @@ public class Trends extends Fragment {
 
         // Set graph title.
         // source: http://www.android-graphview.org/style-options/
-        graphView.setTitle("Wins/Losses");
+        graphView.setTitle("Profit per Session");
         graphView.setTitleTextSize(70);
 
         // Make the legend for the graph.

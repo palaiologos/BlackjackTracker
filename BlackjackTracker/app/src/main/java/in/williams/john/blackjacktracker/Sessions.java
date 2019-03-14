@@ -15,17 +15,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.GridLayout.LayoutParams;
 
+import org.w3c.dom.Text;
+
 public class Sessions extends Fragment {
 
     // Create instance of DatabaseHelper for showing data.
     // source: https://www.youtube.com/watch?v=p8TaTgr4uKM&index=2&list=PLS1QulWo1RIaRdy16cOzBO5Jr6kEagA07
     DatabaseHelper myDb;
+    TextView VrunnningTotal;
+    Button mReset;
 
     // Table Layout object.
     private TableLayout t1;
@@ -41,8 +46,26 @@ public class Sessions extends Fragment {
         // Make instance of new db helper class.
         myDb = new DatabaseHelper(getActivity());
 
+        VrunnningTotal = (TextView)getView().findViewById(R.id.total_winnings);
+        mReset = (Button)getView().findViewById(R.id.button_reset);
+
         // Designate table row as the one in the layout with this ID.
         t1 = (TableLayout) getView().findViewById(R.id.sessions_table_main);
+
+        // Set on click listener for delete button.
+        mReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Ask for confirmation.
+
+                // Then, delete all rows in sessions db.
+
+            }
+        });
+
+
+
+
         // View all for showing all db records.
         viewAll();
     }
@@ -122,45 +145,11 @@ public class Sessions extends Fragment {
             } while (res.moveToNext()); // End do-while loop.
 
             //-------------------------------------------------------------------------------------
-            // At the very end, add a running total counter.
+            // At the very end, set the running total counter.
             //-------------------------------------------------------------------------------------
-            // Make one last table row for our running total.
-            TableRow row = new TableRow(getActivity());
-            // Set the params to fill parent and wrap content.
-            TableLayout.LayoutParams tableRowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.MATCH_PARENT);
-            row.setLayoutParams(tableRowParams);
+            VrunnningTotal.setText("Running Total: $ " + Double.toString(Settings.round(running_total, 2)));
 
-            // Set up the text view for the running total text.
-            TextView tv = new TextView(getActivity());
-            // Set it to be a table row type.
-            tv.setLayoutParams(new TableRow.LayoutParams(
-                    TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT));
-            // Set the data to gravitate to the center of the view.
-            tv.setGravity(Gravity.CENTER);
-            // Set attributes of view.
-            tv.setTextSize(18);
-            tv.setPadding(0, 5, 5 ,5);
 
-            // Get the text of the column we are currently on.
-            // If positive, add a plus sign.
-            if (running_total > 0) {
-                tv.setText("Total: +$" + running_total);
-            }
-            // Otherwise, 0 will have nothing and negatives will have the minus.
-            else {
-                tv.setText("Total: $" + running_total);
-            }
-
-            // Add the actual table row to the layout.
-            row.addView(tv);
-            //-------------------------------------------------------------------------------------
-            // End running total section.
-            //-------------------------------------------------------------------------------------
-
-            // Add running_total row to the layout.
-            t1.addView(row);
 
         } // End res.moveToFirst if.
 
