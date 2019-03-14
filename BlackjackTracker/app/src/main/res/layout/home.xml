@@ -34,8 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="Blackjack News"
-        android:background="#808080" />
+        android:text="Blackjack News" />
 
 
 
@@ -54,8 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="Basic Rules"
-        android:background="#808080" />
+        android:text="Basic Rules" />
 
 
 
@@ -74,8 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="Strategy Charts"
-        android:background="#808080" />
+        android:text="Strategy Charts" />
 
 
 
@@ -95,8 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="Basic Strategy"
-        android:background="#808080" />
+        android:text="Basic Strategy" />
 
 
 
@@ -115,7 +111,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_gravity="center"
-        android:text="Counting Cards"
-        android:background="#808080" />
+        android:text="Counting Cards" />
 
 </LinearLayout>
