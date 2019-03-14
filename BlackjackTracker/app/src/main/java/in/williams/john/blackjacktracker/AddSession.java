@@ -1,10 +1,12 @@
 package in.williams.john.blackjacktracker;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,28 +110,101 @@ public class AddSession extends Fragment {
         );
     }
 
+
+    // Method for checking the validity of the forms.
+    public static boolean isAnyFieldNullOrEmpty(String date, String location, String time, String shoes, String buyIn, String cashOut) {
+        // Check all fields for validity.
+        if (date == null || date.isEmpty()) {
+            return true;
+        }
+        else if (location == null || location.isEmpty()) {
+            return true;
+        }
+        else if (time == null || time.isEmpty()) {
+            return true;
+        }
+        else if (shoes == null || shoes.isEmpty()) {
+            return true;
+        }
+        else if (buyIn == null || buyIn.isEmpty()) {
+            return true;
+        }
+        else if (cashOut == null || cashOut.isEmpty()) {
+            return true;
+        }
+        // Otherwise, they're all good to go.
+        else {
+            return false;
+        }
+    }
+
     // Method for add data button.
     public void addData() {
         btnAddData.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Uses method from DatabaseHelper.java to add data.
-                        // Use ParseInt to get numeric data. Make it a bool so we can tell if it worked or not.
-                        // source: https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
-                        boolean isInserted = myDb.insertData(editDate.getText().toString(), editLocation.getText().toString(), Integer.parseInt(editTime.getText().toString()), Integer.parseInt(editShoes.getText().toString()),
-                                Integer.parseInt(editBuyIn.getText().toString()), Integer.parseInt(editCashOut.getText().toString()) );
+                        // EditText editDate, editLocation, editTime, editShoes, editBuyIn, editCashOut, editTextId;
+                        // Fail if any rows are empty, except ID.
+                        // To-do
+                        String date = editDate.getText().toString();
+                        String location = editLocation.getText().toString();
+                        String time = editTime.getText().toString();
+                        String shoes = editShoes.getText().toString();
+                        String buyIn = editBuyIn.getText().toString();
+                        String cashOut = editCashOut.getText().toString();
 
-                        // Output the results for debugging based on whether it worked or not.
-                        if (isInserted) {
-                            // Use getActivity() instead of 'this' for the context objects, because it is a fragment.
-                            // source: getActivity()
-                            Toast.makeText(getActivity(), "Data Inserted Successfully", Toast.LENGTH_LONG).show();
+                        // If any fields empty, don't allow insertion.
+                        if (isAnyFieldNullOrEmpty(date, location, time, shoes, buyIn, cashOut)) {
+                            // Show error message.
+                            Toast.makeText(getActivity(), "Need to finish filling out forms", Toast.LENGTH_LONG).show();
                         }
+                        // Otherwise, everything is filled in and good to go.
                         else {
-                            Toast.makeText(getActivity(), "Data Insertion Failed", Toast.LENGTH_LONG).show();
-                        }
-                    }
+
+                            // Create alert dialogue box to display success.
+                            AlertDialog.Builder aBuilder = new AlertDialog.Builder(getContext());
+
+                            // Ask for confirmation and set up the button for confirmation.
+                            aBuilder.setMessage("Add new session?").setCancelable(false)
+                                    .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        // If the user clicks 'yes' to confirmation, then proceed.
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // Uses method from DatabaseHelper.java to add data.
+                                            // Use ParseInt to get numeric data. Make it a bool so we can tell if it worked or not.
+                                            // source: https://stackoverflow.com/questions/4903515/how-do-i-return-an-int-from-edittext-android
+                                            boolean isInserted = myDb.insertData(editDate.getText().toString(), editLocation.getText().toString(), Integer.parseInt(editTime.getText().toString()), Integer.parseInt(editShoes.getText().toString()),
+                                                    Integer.parseInt(editBuyIn.getText().toString()), Integer.parseInt(editCashOut.getText().toString()) );
+
+                                            // Output the results for debugging based on whether it worked or not.
+                                            if (isInserted) {
+                                                // Use getActivity() instead of 'this' for the context objects, because it is a fragment.
+                                                // source: getActivity()
+                                                Toast.makeText(getActivity(), "Data Inserted Successfully", Toast.LENGTH_LONG).show();
+                                            }
+                                            else {
+                                                Toast.makeText(getActivity(), "Data Insertion Failed", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+
+                                        // Set the no button, its text and what it does.
+                                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                // Otherwise, they clicked 'no' and want to go back.
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Close the alert box.
+                                    dialog.cancel();
+                                }
+                            });
+                            // Actually show the dialogue box.
+                            AlertDialog alert = aBuilder.create();
+                            alert.setTitle("Confirm");
+                            alert.show();
+
+                        } // End else.
+
+                    } // End OnClick.
                 }
         );
     }
