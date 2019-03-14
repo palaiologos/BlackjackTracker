@@ -93,20 +93,64 @@ public class AddSession extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // For checking if successfully updated. Using the same input style as addData() funciton below.
-                        boolean isUpdated = myDb.updateData(editTextId.getText().toString(), editDate.getText().toString(), editLocation.getText().toString(),
-                                Integer.parseInt(editTime.getText().toString()), Integer.parseInt(editShoes.getText().toString()),
-                                Integer.parseInt(editBuyIn.getText().toString()), Integer.parseInt(editCashOut.getText().toString()));
+                        // EditText editDate, editLocation, editTime, editShoes, editBuyIn, editCashOut, editTextId;
+                        // Fail if any rows are empty, except ID.
+                        String date = editDate.getText().toString();
+                        String location = editLocation.getText().toString();
+                        String time = editTime.getText().toString();
+                        String shoes = editShoes.getText().toString();
+                        String buyIn = editBuyIn.getText().toString();
+                        String cashOut = editCashOut.getText().toString();
 
-                        // If updated successfully, show message with Toast.
-                        if (isUpdated == true) {
-                            Toast.makeText(getActivity(), "Data Updated Successfully", Toast.LENGTH_LONG).show();
+                        // If any fields empty, don't allow insertion.
+                        if (isAnyFieldNullOrEmpty(date, location, time, shoes, buyIn, cashOut)) {
+                            // Show error message.
+                            Toast.makeText(getActivity(), "Missing some info", Toast.LENGTH_LONG).show();
                         }
+                        // Otherwise, update it.
                         else {
-                            Toast.makeText(getActivity(), "Data Update Failed", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
+                            // Create alert dialogue box to display success.
+                            AlertDialog.Builder aBuilder = new AlertDialog.Builder(getContext());
+
+                            // Ask for confirmation and set up the button for confirmation.
+                            aBuilder.setMessage("Update session?").setCancelable(false)
+                                    .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        // If the user clicks 'yes' to confirmation, then proceed.
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // For checking if successfully updated. Using the same input style as addData() funciton below.
+                                            boolean isUpdated = myDb.updateData(editTextId.getText().toString(), editDate.getText().toString(), editLocation.getText().toString(),
+                                                    Integer.parseInt(editTime.getText().toString()), Integer.parseInt(editShoes.getText().toString()),
+                                                    Integer.parseInt(editBuyIn.getText().toString()), Integer.parseInt(editCashOut.getText().toString()));
+
+                                            // If updated successfully, show message with Toast.
+                                            if (isUpdated == true) {
+                                                Toast.makeText(getActivity(), "Data Updated Successfully", Toast.LENGTH_LONG).show();
+                                            }
+                                            else {
+                                                Toast.makeText(getActivity(), "Data Update Failed", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+
+                                        // Set the no button, its text and what it does.
+                                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                // Otherwise, they clicked 'no' and want to go back.
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Close the alert box.
+                                    dialog.cancel();
+                                }
+                            });
+                            // Actually show the dialogue box.
+                            AlertDialog alert = aBuilder.create();
+                            alert.setTitle("Confirm");
+                            alert.show();
+
+
+                        } // End else.
+
+                    } // End OnClick.
+                } // End listener.
         );
     }
 
@@ -146,7 +190,6 @@ public class AddSession extends Fragment {
                     public void onClick(View v) {
                         // EditText editDate, editLocation, editTime, editShoes, editBuyIn, editCashOut, editTextId;
                         // Fail if any rows are empty, except ID.
-                        // To-do
                         String date = editDate.getText().toString();
                         String location = editLocation.getText().toString();
                         String time = editTime.getText().toString();
@@ -157,7 +200,7 @@ public class AddSession extends Fragment {
                         // If any fields empty, don't allow insertion.
                         if (isAnyFieldNullOrEmpty(date, location, time, shoes, buyIn, cashOut)) {
                             // Show error message.
-                            Toast.makeText(getActivity(), "Need to finish filling out forms", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Missing some info", Toast.LENGTH_LONG).show();
                         }
                         // Otherwise, everything is filled in and good to go.
                         else {
