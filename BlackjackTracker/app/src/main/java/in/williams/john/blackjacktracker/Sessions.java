@@ -1,8 +1,10 @@
 package in.williams.john.blackjacktracker;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +25,8 @@ import android.widget.Toast;
 import android.widget.GridLayout.LayoutParams;
 
 import org.w3c.dom.Text;
+
+import static java.sql.Types.NULL;
 
 public class Sessions extends Fragment {
 
@@ -47,28 +51,60 @@ public class Sessions extends Fragment {
         myDb = new DatabaseHelper(getActivity());
 
         VrunnningTotal = (TextView)getView().findViewById(R.id.total_winnings);
-        mReset = (Button)getView().findViewById(R.id.button_reset);
 
         // Designate table row as the one in the layout with this ID.
         t1 = (TableLayout) getView().findViewById(R.id.sessions_table_main);
+
+        // Custom button clicking method for deletion of all records.
+        onDeleteButtonClickListener();
+
+        // View all for showing all db records.
+        viewAll();
+    }
+
+
+    // Method for clicking on deletion button.
+    public void onDeleteButtonClickListener() {
+        mReset = (Button)getView().findViewById(R.id.button_reset);
 
         // Set on click listener for delete button.
         mReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Ask for confirmation.
+                // Create alert to clicking the button.
+                AlertDialog.Builder aBuilder = new AlertDialog.Builder(getContext());
 
-                // Then, delete all rows in sessions db.
+                // Ask for confirmation and set up the button for confirmation.
+                aBuilder.setMessage("Delete all sessions?").setCancelable(false)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    // If the user clicks 'yes' to confirmation, then proceed.
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Delete all records.
+                        myDb.deleteAllRows();
+                        // Refresh page somehow.
+                    }
+
+                    // Set the no button, its text and what it does.
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    // Otherwise, they clicked 'no' and want to go back.
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Close the alert box.
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alert = aBuilder.create();
+                alert.setTitle("Are you sure?");
+                alert.show();
 
             }
         });
 
-
-
-
-        // View all for showing all db records.
-        viewAll();
     }
+
+
 
     // As soon as page loads, will send a cursor object through the db and
     // get each column, row by row. Then place it in something to display.
@@ -77,6 +113,8 @@ public class Sessions extends Fragment {
         if (res.getCount() == 0) {
             // Show message.
             showMessage("Alert", "No sessions found");
+            VrunnningTotal.setText("Running Total: $ 0");
+
             return;
         }
 
@@ -86,6 +124,7 @@ public class Sessions extends Fragment {
         if (res.moveToFirst()) {
             // Keeping track of all-time net win/loss.
             int running_total = 0;
+            int sessions = 0;
 
             // Do-while loop while there is a next value for cursor to go to.
             do {
@@ -124,6 +163,11 @@ public class Sessions extends Fragment {
                             // Get the text of the column we are currently on.
                             tv.setText("$" + res.getString(j));
                         }
+                        // If first column, is ID. So Increment sessions.
+                        else if (j == 0) {
+                            sessions++;
+                            tv.setText(Integer.toString(sessions));
+                        }
                         // Otherwise, regular number for other columns.
                         else {
                             // Get the text of the column we are currently on.
@@ -148,8 +192,6 @@ public class Sessions extends Fragment {
             // At the very end, set the running total counter.
             //-------------------------------------------------------------------------------------
             VrunnningTotal.setText("Running Total: $ " + Double.toString(Settings.round(running_total, 2)));
-
-
 
         } // End res.moveToFirst if.
 

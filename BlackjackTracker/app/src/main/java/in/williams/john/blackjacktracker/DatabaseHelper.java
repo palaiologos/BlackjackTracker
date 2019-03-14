@@ -133,4 +133,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Function will return an int upon finishing.
         return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
     }
+
+
+    // Delete all the data rows in the database.
+    public void deleteAllRows() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + "session_table");
+    }
 }
