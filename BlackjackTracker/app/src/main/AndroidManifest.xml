@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-
         <!-- Then the drawer menu which is the main activity -->
         <activity
             android:name=".DrawerMenu"

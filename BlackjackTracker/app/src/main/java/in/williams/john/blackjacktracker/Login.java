@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ public class Login extends AppCompatActivity {
         mTextViewRegister = (TextView) findViewById(R.id.textview_register);
 
         session = new UserAccountManager(getApplicationContext());
+
+        mTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
 
         // On click listener for the register button.
