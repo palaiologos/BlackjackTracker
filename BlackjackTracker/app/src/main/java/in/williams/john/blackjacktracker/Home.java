@@ -51,7 +51,7 @@ public class Home extends Fragment {
             public void onClick(View view) {
 
                 // Link to url of news.
-                String url = "https://assets.bj21.com/newsletters/pdf_files/000/000/028/original/CBJN1805.pdf?1525361174";
+                String url = "https://bj21.com/cbjn";
                 Intent news = new Intent(Intent.ACTION_VIEW, Uri.parse( url) );
 
                 startActivity(news);
