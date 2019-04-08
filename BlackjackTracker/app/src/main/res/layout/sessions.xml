@@ -49,51 +49,52 @@
                 android:layout_weight="0.2"
                 android:padding="1dip"
                 android:text="Session"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
 
-            <TextView
+            <ImageView
                 android:id="@+id/table_date"
                 android:layout_column="0"
                 android:layout_weight="0.2"
                 android:padding="1dip"
-                android:text="Date"
+                android:src="@drawable/date_icon"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/table_location"
                 android:layout_column="1"
                 android:padding="3dip"
-                android:text="Location"
+                android:src="@drawable/location_icon"
                 android:layout_weight="0.2"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/table_time"
                 android:layout_column="2"
                 android:padding="3dip"
-                android:text="Time"
+                android:src="@drawable/time_icon"
                 android:layout_weight="0.2"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/table_shoes"
                 android:layout_column="3"
                 android:padding="3dip"
-                android:text="Shoes"
+                android:src="@drawable/shoes_icon"
                 android:layout_weight="0.2"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/table_outcome"
                 android:layout_column="4"
                 android:padding="3dip"
-                android:text="Result"
+                android:src="@drawable/money_icon"
                 android:layout_weight="0.2"
                 android:textAlignment="center"
                 android:textSize="16sp" />
