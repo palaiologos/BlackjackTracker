@@ -157,6 +157,9 @@ public class AddSession extends Fragment {
 
     // Method for checking the validity of the forms.
     public static boolean isAnyFieldNullOrEmpty(String date, String location, String time, String shoes, String buyIn, String cashOut) {
+        // Strip time of its non-integer chars.
+        String strippedTime = time.replaceAll("\\D+", "");
+
         // Check all fields for validity.
         if (date == null || date.isEmpty()) {
             return true;
@@ -164,7 +167,7 @@ public class AddSession extends Fragment {
         else if (location == null || location.isEmpty()) {
             return true;
         }
-        else if (time == null || time.isEmpty()) {
+        else if (time == null || time.isEmpty() || !strippedTime.equals(time)) {
             return true;
         }
         else if (shoes == null || shoes.isEmpty()) {
@@ -200,7 +203,7 @@ public class AddSession extends Fragment {
                         // If any fields empty, don't allow insertion.
                         if (isAnyFieldNullOrEmpty(date, location, time, shoes, buyIn, cashOut)) {
                             // Show error message.
-                            Toast.makeText(getActivity(), "Missing some info", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Info missing or wrong format. Time must be a number", Toast.LENGTH_LONG).show();
                         }
                         // Otherwise, everything is filled in and good to go.
                         else {
